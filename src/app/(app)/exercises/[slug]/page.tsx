@@ -67,11 +67,15 @@ export default async function ExerciseDetailPage({
             kind="photo"
             label={exercise.photo_label}
             filled={Boolean(exercise.image_url)}
+            src={exercise.image_url}
+            title={exercise.name}
           />
           <ExerciseMediaSlot
             kind="video"
             label={exercise.video_label}
             filled={Boolean(exercise.video_url)}
+            src={exercise.video_url}
+            title={exercise.name}
           />
         </div>
 

@@ -32,7 +32,7 @@ export function AdminExerciseForm({ exercise }: AdminExerciseFormProps) {
   );
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={formAction} className="space-y-6" encType="multipart/form-data">
       <input type="hidden" name="slug" value={exercise.slug} />
 
       <div className="space-y-2">
@@ -106,29 +106,108 @@ export function AdminExerciseForm({ exercise }: AdminExerciseFormProps) {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="imageUrl">Photo URL (optional)</Label>
-        <Input
-          id="imageUrl"
-          name="imageUrl"
-          type="url"
-          placeholder="https://…/seated-shoulder-press.jpg"
-          defaultValue={exercise.image_url ?? ""}
-        />
-        <p className="text-xs text-muted-foreground">{exercise.photo_label}</p>
-      </div>
+      <fieldset className="space-y-4 rounded-md border border-border px-4 py-4">
+        <legend className="px-1 font-medium text-foreground">Photo</legend>
+        <p className="text-sm text-muted-foreground">{exercise.photo_label}</p>
 
-      <div className="space-y-2">
-        <Label htmlFor="videoUrl">Video URL (optional)</Label>
-        <Input
-          id="videoUrl"
-          name="videoUrl"
-          type="url"
-          placeholder="https://…/seated-shoulder-press.mp4"
-          defaultValue={exercise.video_url ?? ""}
-        />
-        <p className="text-xs text-muted-foreground">{exercise.video_label}</p>
-      </div>
+        {exercise.image_url ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={exercise.image_url}
+            alt={`Current photo for ${exercise.name}`}
+            className="max-h-48 w-full rounded-md border border-border object-cover"
+          />
+        ) : (
+          <p className="text-sm text-muted-foreground">No photo uploaded yet.</p>
+        )}
+
+        <div className="space-y-2">
+          <Label htmlFor="imageFile">Upload photo from your computer</Label>
+          <Input
+            id="imageFile"
+            name="imageFile"
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+          />
+          <p className="text-xs text-muted-foreground">
+            JPEG, PNG, WebP, or GIF · max 5 MB
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="imageUrl">Or paste a photo URL (optional)</Label>
+          <Input
+            id="imageUrl"
+            name="imageUrl"
+            type="url"
+            placeholder="https://…"
+            defaultValue={exercise.image_url ?? ""}
+          />
+        </div>
+
+        {exercise.image_url ? (
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              name="removeImage"
+              className="size-4 accent-[var(--primary)]"
+            />
+            Remove current photo
+          </label>
+        ) : null}
+      </fieldset>
+
+      <fieldset className="space-y-4 rounded-md border border-border px-4 py-4">
+        <legend className="px-1 font-medium text-foreground">Video</legend>
+        <p className="text-sm text-muted-foreground">{exercise.video_label}</p>
+
+        {exercise.video_url ? (
+          <video
+            src={exercise.video_url}
+            controls
+            className="max-h-64 w-full rounded-md border border-border bg-black"
+          >
+            Your browser cannot play this video.
+          </video>
+        ) : (
+          <p className="text-sm text-muted-foreground">No video uploaded yet.</p>
+        )}
+
+        <div className="space-y-2">
+          <Label htmlFor="videoFile">Upload video from your computer</Label>
+          <Input
+            id="videoFile"
+            name="videoFile"
+            type="file"
+            accept="video/mp4,video/webm,video/quicktime"
+          />
+          <p className="text-xs text-muted-foreground">
+            MP4, WebM, or MOV · max 50 MB
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="videoUrl">Or paste a video URL (optional)</Label>
+          <Input
+            id="videoUrl"
+            name="videoUrl"
+            type="url"
+            placeholder="https://…"
+            defaultValue={exercise.video_url ?? ""}
+          />
+        </div>
+
+        {exercise.video_url ? (
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              name="removeVideo"
+              className="size-4 accent-[var(--primary)]"
+            />
+            Remove current video
+          </label>
+        ) : null}
+      </fieldset>
 
       {state.error ? <FormMessage error={state.error} /> : null}
       {state.success ? <FormMessage success={state.success} /> : null}

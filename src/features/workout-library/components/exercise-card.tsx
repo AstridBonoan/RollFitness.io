@@ -16,11 +16,44 @@ export function ExerciseMediaSlot({
   kind,
   label,
   filled,
+  src,
+  title,
 }: {
   kind: "photo" | "video";
   label: string;
   filled: boolean;
+  src?: string | null;
+  title?: string;
 }) {
+  if (filled && src && kind === "photo") {
+    return (
+      <div className="overflow-hidden rounded-md border border-border">
+        {/* Storage URLs are dynamic; native img avoids remote-pattern churn. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={title ? `Photo of ${title}` : label}
+          className="aspect-[16/10] w-full object-cover"
+        />
+      </div>
+    );
+  }
+
+  if (filled && src && kind === "video") {
+    return (
+      <div className="overflow-hidden rounded-md border border-border bg-black">
+        <video
+          src={src}
+          controls
+          className="aspect-[16/10] w-full"
+          aria-label={title ? `Video of ${title}` : label}
+        >
+          Your browser cannot play this video.
+        </video>
+      </div>
+    );
+  }
+
   return (
     <div
       className={
@@ -38,7 +71,7 @@ export function ExerciseMediaSlot({
         <p className="mt-2 text-sm font-medium text-foreground">{label}</p>
         {!filled ? (
           <p className="mt-1 text-xs text-muted-foreground">
-            Upload later — keep filename aligned with this exercise slug.
+            Admin can upload from the computer on the Admin → Exercises page.
           </p>
         ) : null}
       </div>
@@ -53,6 +86,8 @@ export function ExerciseCard({ exercise }: ExerciseCardProps) {
         kind="photo"
         label={exercise.photo_label}
         filled={Boolean(exercise.image_url)}
+        src={exercise.image_url}
+        title={exercise.name}
       />
 
       <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">

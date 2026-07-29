@@ -46,4 +46,12 @@ SQL editor sessions (no end-user JWT) can still change `role` — that is intent
 ## What admins can do
 
 - `/admin` — admin home
-- `/admin/exercises` — edit catalog copy and media URLs (photo/video slots)
+- `/admin/exercises` — edit catalog copy
+- Upload **photo and video files from your computer** (stored in Supabase Storage bucket `exercise-media`)
+- Optional paste URL still available as a fallback
+
+### Storage migration
+
+Apply `supabase/migrations/00007_exercise_media_storage.sql` after `00006`.
+
+Limits: photos ≤ 5 MB (JPEG/PNG/WebP/GIF); videos ≤ 50 MB (MP4/WebM/MOV).

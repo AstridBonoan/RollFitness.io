@@ -18,12 +18,17 @@ See `docs/ADMIN.md` for the exact SQL to promote your account.
 | --- | --- |
 | `/admin` | Admin home (admin only) |
 | `/admin/exercises` | Catalog list |
-| `/admin/exercises/[slug]` | Edit exercise + media URLs |
+| `/admin/exercises/[slug]` | Edit exercise, upload photo/video from disk, or paste URLs |
+
+## Media
+
+Requires `00007_exercise_media_storage.sql`. Admins upload into the public `exercise-media` bucket; URLs are saved on `exercises.image_url` / `video_url`.
 
 ## Acceptance criteria
 
 - [x] Role defaults to member; signup cannot choose admin
 - [x] Role changes blocked from authenticated app sessions
 - [x] Admin UI gated server-side
+- [x] Admin can upload local photo/video files
 - [x] Docs for Supabase promotion
 - [ ] PR opened; CI green before merge
