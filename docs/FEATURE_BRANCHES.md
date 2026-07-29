@@ -15,7 +15,7 @@ Each branch is an independent product increment. Implement, test, document, PR, 
 | `feature/friends-system` | `src/features/friends-system` | Requests, invites, friend activity |
 | `feature/accountability-partners` | `src/features/accountability-partners` | Partners, shared goals, check-ins |
 | `feature/achievements` | `src/features/achievements` | Professional gamification / badges |
-| `feature/accessibility-system` | `src/features/accessibility-system` | Theme, contrast, font scale, motion, SR tooling |
+| `feature/accessibility-system` | `src/features/accessibility-system` | Contrast, font scale, motion, SR tooling |
 | `feature/notifications` | `src/features/notifications` | In-app + realtime notifications |
 | `feature/dashboard` | `src/features/dashboard` | Personalized home surface composing modules |
 

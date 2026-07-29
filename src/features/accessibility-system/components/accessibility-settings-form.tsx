@@ -13,8 +13,6 @@ import { applyAccessibilityClasses } from "@/features/accessibility-system/lib/a
 import {
   FONT_SCALE_LABELS,
   FONT_SCALE_OPTIONS,
-  THEME_LABELS,
-  THEME_OPTIONS,
   type AccessibilitySettings,
   type FontScale,
   type ThemePreference,
@@ -22,6 +20,27 @@ import {
 import { FormMessage } from "@/features/authentication/components/auth-shell";
 
 const initialState: AccessibilityActionState = {};
+
+const MANAGED_CLASSES = [
+  "dark",
+  "high-contrast",
+  "font-scale-large",
+  "font-scale-x-large",
+  "reduce-motion",
+] as const;
+
+function applyAccessibilityClasses(settings: AccessibilitySettings) {
+  const root = document.documentElement;
+  const next = new Set(
+    accessibilityClassNames(settings).split(" ").filter(Boolean),
+  );
+
+  for (const className of MANAGED_CLASSES) {
+    root.classList.toggle(className, next.has(className));
+  }
+
+  root.style.colorScheme = "light";
+}
 
 type AccessibilitySettingsFormProps = {
   settings: AccessibilitySettings;
@@ -103,6 +122,9 @@ export function AccessibilitySettingsForm({
         <legend className="font-display text-xl font-semibold tracking-tight text-foreground">
           Text size
         </legend>
+    <form action={formAction} className="space-y-8">
+      <fieldset className="space-y-3">
+        <legend className="font-medium text-foreground">Text size</legend>
         <p className="text-sm text-muted-foreground">
           Scales the whole interface. Browser zoom still works on its own.
         </p>

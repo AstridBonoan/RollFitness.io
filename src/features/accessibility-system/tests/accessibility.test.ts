@@ -4,7 +4,6 @@ import {
 import {
   accessibilityClassNames,
   parseAccessibilitySettings,
-  resolveThemeClass,
   settingsFromCookieValue,
 } from "@/features/accessibility-system/lib/settings";
 import { accessibilitySettingsSchema } from "@/features/accessibility-system/schemas/accessibility";
@@ -16,7 +15,7 @@ describe("parseAccessibilitySettings", () => {
     );
   });
 
-  it("parses a valid settings object", () => {
+  it("parses a valid settings object and ignores legacy theme", () => {
     expect(
       parseAccessibilitySettings({
         theme: "dark",
@@ -25,7 +24,6 @@ describe("parseAccessibilitySettings", () => {
         reduce_motion: true,
       }),
     ).toEqual({
-      theme: "dark",
       high_contrast: true,
       font_scale: "large",
       reduce_motion: true,
@@ -37,7 +35,6 @@ describe("settingsFromCookieValue", () => {
   it("decodes URI-encoded cookie payloads", () => {
     const raw = encodeURIComponent(
       JSON.stringify({
-        theme: "light",
         high_contrast: false,
         font_scale: "x-large",
         reduce_motion: false,
@@ -45,36 +42,26 @@ describe("settingsFromCookieValue", () => {
     );
 
     expect(settingsFromCookieValue(raw)).toMatchObject({
-      theme: "light",
       font_scale: "x-large",
     });
   });
 });
 
-describe("resolveThemeClass", () => {
-  it("follows system preference when theme is system", () => {
-    expect(resolveThemeClass("system", true)).toBe("dark");
-    expect(resolveThemeClass("system", false)).toBe("light");
-  });
-});
-
 describe("accessibilityClassNames", () => {
-  it("composes dark, contrast, scale, and motion classes", () => {
+  it("composes contrast, scale, and motion classes", () => {
     expect(
       accessibilityClassNames({
-        theme: "dark",
         high_contrast: true,
         font_scale: "large",
         reduce_motion: true,
       }),
-    ).toBe("dark high-contrast font-scale-large reduce-motion");
+    ).toBe("high-contrast font-scale-large reduce-motion");
   });
 });
 
 describe("accessibilitySettingsSchema", () => {
   it("accepts valid form payloads", () => {
     const result = accessibilitySettingsSchema.safeParse({
-      theme: "system",
       highContrast: true,
       fontScale: "default",
       reduceMotion: false,
