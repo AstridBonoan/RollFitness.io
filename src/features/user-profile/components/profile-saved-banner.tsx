@@ -2,42 +2,27 @@
 
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-
-type ProfileSavedBannerProps = {
-  visible: boolean;
-};
+import { useEffect } from "react";
 
 const AUTO_DISMISS_MS = 5000;
 
-export function ProfileSavedBanner({ visible }: ProfileSavedBannerProps) {
+/**
+ * Mount only when a save just succeeded. Auto-hides after 5s or on dismiss
+ * by clearing the `saved` query param.
+ */
+export function ProfileSavedBanner() {
   const router = useRouter();
-  const [open, setOpen] = useState(visible);
 
   useEffect(() => {
-    setOpen(visible);
-  }, [visible]);
-
-  useEffect(() => {
-    if (!open) {
-      return;
-    }
-
     const timeoutId = window.setTimeout(() => {
-      setOpen(false);
       router.replace("/profile", { scroll: false });
     }, AUTO_DISMISS_MS);
 
     return () => window.clearTimeout(timeoutId);
-  }, [open, router]);
+  }, [router]);
 
   function dismiss() {
-    setOpen(false);
     router.replace("/profile", { scroll: false });
-  }
-
-  if (!open) {
-    return null;
   }
 
   return (

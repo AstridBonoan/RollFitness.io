@@ -80,7 +80,7 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
         </p>
 
         <div className="mt-8">
-          <ProfileSavedBanner visible={justSaved} />
+          {justSaved ? <ProfileSavedBanner /> : null}
         </div>
 
         <div className="mt-2">

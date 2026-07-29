@@ -21,37 +21,30 @@ describe("ProfileSavedBanner", () => {
     jest.useRealTimers();
   });
 
-  it("shows a saved confirmation when visible", () => {
-    render(<ProfileSavedBanner visible />);
+  it("shows a saved confirmation when mounted", () => {
+    render(<ProfileSavedBanner />);
     expect(screen.getByText("Your profile has been saved.")).toBeInTheDocument();
     expect(screen.getByRole("status")).toBeInTheDocument();
   });
 
-  it("renders nothing when not visible", () => {
-    const { container } = render(<ProfileSavedBanner visible={false} />);
-    expect(container).toBeEmptyDOMElement();
-  });
-
-  it("closes when the dismiss button is pressed", async () => {
+  it("clears the saved query when dismiss is pressed", async () => {
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
-    render(<ProfileSavedBanner visible />);
+    render(<ProfileSavedBanner />);
 
     await user.click(
       screen.getByRole("button", { name: /dismiss saved message/i }),
     );
 
-    expect(screen.queryByRole("status")).not.toBeInTheDocument();
     expect(replaceMock).toHaveBeenCalledWith("/profile", { scroll: false });
   });
 
-  it("auto-dismisses after five seconds", () => {
-    render(<ProfileSavedBanner visible />);
+  it("auto-clears the saved query after five seconds", () => {
+    render(<ProfileSavedBanner />);
 
     act(() => {
       jest.advanceTimersByTime(5000);
     });
 
-    expect(screen.queryByRole("status")).not.toBeInTheDocument();
     expect(replaceMock).toHaveBeenCalledWith("/profile", { scroll: false });
   });
 });
