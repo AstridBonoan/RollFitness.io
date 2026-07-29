@@ -1,4 +1,5 @@
 export type {
+  AppRole,
   Database,
   Difficulty,
   FitnessGoal,

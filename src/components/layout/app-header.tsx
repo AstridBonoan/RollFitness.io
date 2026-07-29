@@ -1,12 +1,15 @@
 import Link from "next/link";
 
 import { LogoutButton } from "@/features/authentication/components/logout-button";
+import { isCurrentUserAdmin } from "@/features/authentication/services/admin";
 
 type AppHeaderProps = {
-  current?: "account" | "profile" | "accessibility" | "exercises";
+  current?: "account" | "profile" | "accessibility" | "exercises" | "admin";
 };
 
-export function AppHeader({ current }: AppHeaderProps) {
+export async function AppHeader({ current }: AppHeaderProps) {
+  const admin = await isCurrentUserAdmin();
+
   return (
     <header className="border-b border-border">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6">
@@ -73,6 +76,21 @@ export function AppHeader({ current }: AppHeaderProps) {
                   Accessibility
                 </Link>
               </li>
+              {admin ? (
+                <li>
+                  <Link
+                    href="/admin"
+                    className={
+                      current === "admin"
+                        ? "font-medium text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    }
+                    aria-current={current === "admin" ? "page" : undefined}
+                  >
+                    Admin
+                  </Link>
+                </li>
+              ) : null}
             </ul>
           </nav>
         </div>

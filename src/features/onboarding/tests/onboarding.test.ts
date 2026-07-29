@@ -26,6 +26,7 @@ const baseProfile = {
     font_scale: "default",
     reduce_motion: false,
   },
+  role: "member",
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
 } satisfies Profile;
