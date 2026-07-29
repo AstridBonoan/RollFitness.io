@@ -11,6 +11,7 @@ const PROTECTED_PREFIXES = [
   "/profile",
   "/onboarding",
   "/accessibility",
+  "/exercises",
   "/update-password",
 ];
 const AUTH_ROUTES = ["/login", "/signup", "/forgot-password", "/verify-email"];
