@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Syne } from "next/font/google";
 
-import { SiteHeader, SkipLink } from "@/components/layout/site-header";
+import { SkipLink } from "@/components/layout/site-header";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
 
 import "./globals.css";
@@ -38,7 +38,6 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans">
         <SkipLink />
-        <SiteHeader />
         {children}
       </body>
     </html>

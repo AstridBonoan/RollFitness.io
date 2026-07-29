@@ -37,10 +37,18 @@ export function SiteHeader() {
             </li>
             <li>
               <Link
-                href="#pillars"
+                href="/login"
                 className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
-                Platform
+                Sign in
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/signup"
+                className="rounded-md bg-white/15 px-3 py-2 text-white transition-colors hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+              >
+                Join
               </Link>
             </li>
           </ul>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { SiteHeader } from "@/components/layout/site-header";
 import { Button } from "@/components/ui/button";
 
 const pillars = [
@@ -20,6 +21,7 @@ const pillars = [
 export default function HomePage() {
   return (
     <>
+      <SiteHeader />
       <section
         className="hero-atmosphere relative flex min-h-dvh items-end overflow-hidden text-white"
         aria-labelledby="hero-brand"
@@ -49,7 +51,7 @@ export default function HomePage() {
           </p>
           <div className="animate-fade-up-delay-2 mt-10 flex flex-wrap gap-4">
             <Button asChild size="lg" className="bg-white text-[#0a4a3d] hover:bg-white/90">
-              <Link href="#pillars">Explore the platform</Link>
+              <Link href="/signup">Get started</Link>
             </Button>
             <Button
               asChild
@@ -57,7 +59,7 @@ export default function HomePage() {
               variant="outline"
               className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
             >
-              <Link href="#about">Why RollnFitness</Link>
+              <Link href="/login">Sign in</Link>
             </Button>
           </div>
         </div>
