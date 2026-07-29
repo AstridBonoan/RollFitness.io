@@ -104,6 +104,9 @@ export interface Database {
           description: string;
           instructions: string;
           video_url: string | null;
+          image_url: string | null;
+          slug: string | null;
+          focus_area: string | null;
           difficulty: Difficulty;
           equipment: string[];
           target_muscles: string[];
@@ -119,6 +122,9 @@ export interface Database {
           description: string;
           instructions: string;
           video_url?: string | null;
+          image_url?: string | null;
+          slug?: string | null;
+          focus_area?: string | null;
           difficulty: Difficulty;
           equipment?: string[];
           target_muscles?: string[];

@@ -62,6 +62,9 @@ export default async function AccountPage() {
           <Button asChild variant="outline">
             <Link href="/accessibility">Accessibility</Link>
           </Button>
+          <Button asChild variant="outline">
+            <Link href="/exercises">Exercise library</Link>
+          </Button>
         </div>
 
         {!isOnboardingComplete(profile) ? (
