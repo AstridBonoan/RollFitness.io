@@ -39,8 +39,8 @@ export default async function AccessibilityPage() {
           Accessibility
         </h1>
         <p className="mt-3 max-w-xl text-muted-foreground">
-          Adjust theme, contrast, text size, and motion so RollnFitness fits how
-          you see and move through the product.
+          Adjust contrast, text size, and motion so RollnFitness fits how you
+          see and move through the product.
         </p>
 
         <div className="mt-10">
