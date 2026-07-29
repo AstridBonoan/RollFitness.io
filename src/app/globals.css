@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #f4f7f5;
   --foreground: #0f1c18;
@@ -22,9 +24,10 @@
   --hero-via: #0a4a3d;
   --hero-to: #126b58;
   --radius: 0.5rem;
+  color-scheme: light;
 }
 
-.dark {
+html.dark {
   --background: #071411;
   --foreground: #e8f2ee;
   --card: #0d1f1a;
@@ -42,6 +45,7 @@
   --border: #1f3d34;
   --input: #1f3d34;
   --ring: #3ecfad;
+  color-scheme: dark;
 }
 
 .high-contrast {
@@ -64,7 +68,7 @@
   --ring: #000000;
 }
 
-.dark.high-contrast {
+html.dark.high-contrast {
   --background: #000000;
   --foreground: #ffffff;
   --card: #000000;

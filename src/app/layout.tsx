@@ -46,7 +46,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: accessibilityBootstrapScript }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col bg-background font-sans text-foreground">
         <SkipLink />
         {children}
       </body>
