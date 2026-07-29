@@ -6,7 +6,7 @@ import {
   getSupabaseUrl,
 } from "@/lib/supabase/env";
 
-const PROTECTED_PREFIXES = ["/account", "/update-password"];
+const PROTECTED_PREFIXES = ["/account", "/profile", "/update-password"];
 const AUTH_ROUTES = ["/login", "/signup", "/forgot-password", "/verify-email"];
 
 /**
