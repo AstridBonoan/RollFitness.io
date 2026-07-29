@@ -12,8 +12,6 @@ import {
 import {
   FONT_SCALE_LABELS,
   FONT_SCALE_OPTIONS,
-  THEME_LABELS,
-  THEME_OPTIONS,
   type AccessibilitySettings,
 } from "@/features/accessibility-system/lib/constants";
 import { accessibilityClassNames } from "@/features/accessibility-system/lib/settings";
@@ -31,16 +29,15 @@ const MANAGED_CLASSES = [
 
 function applyAccessibilityClasses(settings: AccessibilitySettings) {
   const root = document.documentElement;
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const next = new Set(
-    accessibilityClassNames(settings, prefersDark).split(" ").filter(Boolean),
+    accessibilityClassNames(settings).split(" ").filter(Boolean),
   );
 
   for (const className of MANAGED_CLASSES) {
     root.classList.toggle(className, next.has(className));
   }
 
-  root.style.colorScheme = next.has("dark") ? "dark" : "light";
+  root.style.colorScheme = "light";
 }
 
 type AccessibilitySettingsFormProps = {
@@ -65,30 +62,6 @@ export function AccessibilitySettingsForm({
 
   return (
     <form action={formAction} className="space-y-8">
-      <fieldset className="space-y-3">
-        <legend className="font-medium text-foreground">Color theme</legend>
-        <p className="text-sm text-muted-foreground">
-          Choose light, dark, or match your device setting.
-        </p>
-        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-          {THEME_OPTIONS.map((theme) => (
-            <label
-              key={theme}
-              className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-md border border-border px-4 py-2 has-[:checked]:border-primary has-[:checked]:bg-primary/10"
-            >
-              <input
-                type="radio"
-                name="theme"
-                value={theme}
-                defaultChecked={settings.theme === theme}
-                className="size-4 accent-[var(--primary)]"
-              />
-              <span className="text-sm">{THEME_LABELS[theme]}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
-
       <fieldset className="space-y-3">
         <legend className="font-medium text-foreground">Text size</legend>
         <p className="text-sm text-muted-foreground">
