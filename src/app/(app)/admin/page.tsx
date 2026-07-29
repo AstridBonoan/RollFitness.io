@@ -29,7 +29,8 @@ export default async function AdminPage() {
           <div className="rounded-md border border-border px-4 py-4">
             <h2 className="font-medium text-foreground">Exercise library</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Edit names, instructions, safety notes, and photo/video URLs.
+              Edit copy and upload photos or videos from your computer (or paste
+              a URL if you already host the file).
             </p>
             <Button asChild className="mt-4">
               <Link href="/admin/exercises">Manage exercises</Link>
