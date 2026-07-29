@@ -41,20 +41,6 @@ export function ProfileForm({ profile }: ProfileFormProps) {
 
   return (
     <form action={formAction} className="space-y-10" noValidate>
-      {(state.error || state.success) && (
-        <div
-          role="status"
-          aria-live="polite"
-          className={
-            state.error
-              ? "rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive"
-              : "rounded-md bg-primary/10 px-3 py-2 text-sm text-primary"
-          }
-        >
-          {state.error ?? state.success}
-        </div>
-      )}
-
       <section aria-labelledby="basics-heading" className="space-y-5">
         <div>
           <h2
@@ -235,6 +221,15 @@ export function ProfileForm({ profile }: ProfileFormProps) {
       <Button type="submit" disabled={pending}>
         {pending ? "Saving…" : "Save profile"}
       </Button>
+
+      {state.error ? (
+        <div
+          role="alert"
+          className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive"
+        >
+          {state.error}
+        </div>
+      ) : null}
     </form>
   );
 }
