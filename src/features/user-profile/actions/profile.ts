@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 import { profileUpdateSchema } from "@/features/user-profile/schemas/profile";
 import { updateCurrentProfile } from "@/features/user-profile/services/profile";
@@ -78,6 +79,5 @@ export async function updateProfileAction(
 
   revalidatePath("/profile");
   revalidatePath("/account");
-
-  return { success: "Profile saved." };
+  redirect("/profile?saved=1");
 }

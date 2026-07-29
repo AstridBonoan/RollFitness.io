@@ -4,9 +4,8 @@ import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/layout/app-header";
 import { getAuthUser } from "@/features/authentication/services/session";
 import { ProfileForm } from "@/features/user-profile/components/profile-form";
-import {
-  DEFAULT_PRIVACY_SETTINGS,
-} from "@/features/user-profile/lib/labels";
+import { ProfileSavedBanner } from "@/features/user-profile/components/profile-saved-banner";
+import { DEFAULT_PRIVACY_SETTINGS } from "@/features/user-profile/lib/labels";
 import {
   getCurrentProfile,
   type Profile,
@@ -44,7 +43,11 @@ async function ensureProfile(userId: string, displayName?: string | null) {
   } satisfies Profile;
 }
 
-export default async function ProfilePage() {
+type ProfilePageProps = {
+  searchParams: Promise<{ saved?: string }>;
+};
+
+export default async function ProfilePage({ searchParams }: ProfilePageProps) {
   const user = await getAuthUser();
 
   if (!user) {
@@ -60,6 +63,9 @@ export default async function ProfilePage() {
     redirect("/account");
   }
 
+  const params = await searchParams;
+  const justSaved = params.saved === "1";
+
   return (
     <div className="min-h-dvh bg-background">
       <AppHeader current="profile" />
@@ -73,7 +79,11 @@ export default async function ProfilePage() {
           personalize your experience.
         </p>
 
-        <div className="mt-10">
+        <div className="mt-8">
+          <ProfileSavedBanner visible={justSaved} />
+        </div>
+
+        <div className="mt-2">
           <ProfileForm profile={profile} />
         </div>
       </main>
