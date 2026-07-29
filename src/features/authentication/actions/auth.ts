@@ -40,7 +40,7 @@ export async function signUpAction(
   const supabase = await createClient();
   const siteUrl = getSiteUrl();
 
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
     options: {
@@ -53,6 +53,22 @@ export async function signUpAction(
 
   if (error) {
     return { error: error.message };
+  }
+
+  // Prefer the session returned by signup (auto-login).
+  if (data.session) {
+    redirect("/account");
+  }
+
+  // If Supabase did not attach a session (e.g. confirm-email still on),
+  // attempt an immediate password sign-in so the user lands signed in.
+  const { error: signInError } = await supabase.auth.signInWithPassword({
+    email: parsed.data.email,
+    password: parsed.data.password,
+  });
+
+  if (!signInError) {
+    redirect("/account");
   }
 
   redirect("/verify-email");
