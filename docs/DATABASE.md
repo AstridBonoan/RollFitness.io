@@ -8,6 +8,7 @@ PostgreSQL schema for RollnFitness, managed as Supabase migrations.
 2. Run migrations in the SQL editor in order:
    - `supabase/migrations/00001_initial_schema.sql`
    - `supabase/migrations/00002_avatars_storage.sql`
+   - `supabase/migrations/00003_onboarding_fields.sql`
 3. Or use the Supabase CLI: `supabase db push`
 
 ## Core tables

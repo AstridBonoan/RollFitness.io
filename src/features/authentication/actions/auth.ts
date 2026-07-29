@@ -8,6 +8,8 @@ import {
   signupSchema,
   updatePasswordSchema,
 } from "@/features/authentication/schemas/auth";
+import { getPostAuthRedirectPath } from "@/features/onboarding/lib/status";
+import { getCurrentProfile } from "@/features/user-profile/services/profile";
 import { createClient } from "@/lib/supabase/server";
 import { getSiteUrl } from "@/lib/utils/site-url";
 
@@ -44,7 +46,7 @@ export async function signUpAction(
     email: parsed.data.email,
     password: parsed.data.password,
     options: {
-      emailRedirectTo: `${siteUrl}/auth/callback?next=/account`,
+      emailRedirectTo: `${siteUrl}/auth/callback?next=/onboarding`,
       data: {
         display_name: parsed.data.displayName,
       },
@@ -57,7 +59,7 @@ export async function signUpAction(
 
   // Prefer the session returned by signup (auto-login).
   if (data.session) {
-    redirect("/account");
+    redirect("/onboarding");
   }
 
   // If Supabase did not attach a session (e.g. confirm-email still on),
@@ -68,7 +70,7 @@ export async function signUpAction(
   });
 
   if (!signInError) {
-    redirect("/account");
+    redirect("/onboarding");
   }
 
   redirect("/verify-email");
@@ -97,7 +99,8 @@ export async function signInAction(
     return { error: error.message };
   }
 
-  redirect("/account");
+  const profile = await getCurrentProfile();
+  redirect(getPostAuthRedirectPath(profile));
 }
 
 export async function signOutAction(): Promise<void> {

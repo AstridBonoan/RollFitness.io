@@ -6,4 +6,5 @@ export type {
   Json,
   MobilityLevel,
   PartnerStatus,
+  WorkoutExperience,
 } from "./database";

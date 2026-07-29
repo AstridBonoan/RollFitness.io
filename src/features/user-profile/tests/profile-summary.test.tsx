@@ -12,6 +12,8 @@ const profile: Profile = {
   fitness_interests: ["strength"],
   equipment_preferences: ["resistance_bands"],
   mobility_level: "seated",
+  workout_experience: "beginner",
+  onboarding_completed_at: null,
   privacy_settings: {
     profile_visibility: "friends",
     activity_visibility: "private",
