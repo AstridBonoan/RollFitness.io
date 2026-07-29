@@ -18,6 +18,7 @@ export async function saveAccessibilitySettingsAction(
   formData: FormData,
 ): Promise<AccessibilityActionState> {
   const parsed = accessibilitySettingsSchema.safeParse({
+    theme: formData.get("theme"),
     highContrast: formData.get("highContrast") === "on",
     fontScale: formData.get("fontScale"),
     reduceMotion: formData.get("reduceMotion") === "on",
@@ -30,6 +31,7 @@ export async function saveAccessibilitySettingsAction(
   }
 
   const settings: AccessibilitySettings = {
+    theme: parsed.data.theme,
     high_contrast: parsed.data.highContrast,
     font_scale: parsed.data.fontScale,
     reduce_motion: parsed.data.reduceMotion,

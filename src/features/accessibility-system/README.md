@@ -6,11 +6,10 @@
 
 WCAG 2.2 AA platform controls:
 
+- Color theme / dark mode (light / dark / match device)
 - High contrast
 - Font scaling (default / large / extra large)
 - Reduce motion (user preference on top of `prefers-reduced-motion`)
-
-No separate dark-mode / theme toggle — the product stays on the light brand surface.
 
 ## Routes
 
@@ -20,16 +19,17 @@ No separate dark-mode / theme toggle — the product stays on the light brand su
 
 ## Behavior
 
-- Preferences apply via `html` classes: `high-contrast`, `font-scale-*`, `reduce-motion`
-- Cookie `rf-a11y` prevents preference flash (bootstrap script in root layout)
+- Preferences apply via `html` classes: `dark`, `high-contrast`, `font-scale-*`, `reduce-motion`
+- Cookie `rf-a11y` prevents theme flash (bootstrap script in root layout)
 - Signed-in users also persist to `profiles.accessibility_settings`
 - Guests / signed-out sessions still get cookie-based preferences when set
+- Form previews changes immediately before save
 
 ## Structure
 
 - `actions/` — `saveAccessibilitySettingsAction`
 - `components/` — `AccessibilitySettingsForm`
-- `lib/` — constants, parse/serialize, bootstrap script
+- `lib/` — constants, parse/serialize, bootstrap script, apply-classes
 - `schemas/` — Zod validation
 - `services/` — cookie + profile persistence
 - `tests/` — parser / schema unit tests
@@ -45,7 +45,7 @@ Requires `supabase/migrations/00004_accessibility_settings.sql`.
 - [x] Accessibility verified (redirect path + axe)
 - [x] Zod schemas for settings form
 - [x] Feature README updated
-- [x] PR opened; CI green before merge
+- [ ] PR opened; CI green before merge
 
 ## Dependencies
 

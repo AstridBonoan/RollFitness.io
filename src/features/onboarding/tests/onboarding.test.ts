@@ -21,6 +21,7 @@ const baseProfile = {
     activity_visibility: "friends",
   },
   accessibility_settings: {
+    theme: "system",
     high_contrast: false,
     font_scale: "default",
     reduce_motion: false,

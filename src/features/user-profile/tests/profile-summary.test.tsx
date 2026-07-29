@@ -19,6 +19,7 @@ const profile: Profile = {
     activity_visibility: "private",
   },
   accessibility_settings: {
+    theme: "system",
     high_contrast: false,
     font_scale: "default",
     reduce_motion: false,

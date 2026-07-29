@@ -1,9 +1,18 @@
 import {
   DEFAULT_ACCESSIBILITY_SETTINGS,
   FONT_SCALE_OPTIONS,
+  THEME_OPTIONS,
   type AccessibilitySettings,
   type FontScale,
+  type ThemePreference,
 } from "@/features/accessibility-system/lib/constants";
+
+function isTheme(value: unknown): value is ThemePreference {
+  return (
+    typeof value === "string" &&
+    (THEME_OPTIONS as readonly string[]).includes(value)
+  );
+}
 
 function isFontScale(value: unknown): value is FontScale {
   return (
@@ -22,6 +31,9 @@ export function parseAccessibilitySettings(
   const record = value as Record<string, unknown>;
 
   return {
+    theme: isTheme(record.theme)
+      ? record.theme
+      : DEFAULT_ACCESSIBILITY_SETTINGS.theme,
     high_contrast:
       typeof record.high_contrast === "boolean"
         ? record.high_contrast
@@ -61,10 +73,25 @@ export function settingsFromCookieValue(
   }
 }
 
+export function resolveThemeClass(
+  theme: ThemePreference,
+  prefersDark: boolean,
+): "light" | "dark" {
+  if (theme === "dark") return "dark";
+  if (theme === "light") return "light";
+  return prefersDark ? "dark" : "light";
+}
+
 export function accessibilityClassNames(
   settings: AccessibilitySettings,
+  prefersDark = false,
 ): string {
   const classes: string[] = [];
+  const resolved = resolveThemeClass(settings.theme, prefersDark);
+
+  if (resolved === "dark") {
+    classes.push("dark");
+  }
 
   if (settings.high_contrast) {
     classes.push("high-contrast");
