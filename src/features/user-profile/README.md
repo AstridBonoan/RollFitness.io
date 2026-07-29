@@ -7,6 +7,7 @@
 Profile creation/editing for signed-in members:
 
 - Display name and bio
+- Profile picture upload / remove (Supabase Storage `avatars` bucket)
 - Mobility level (functional ability — diagnosis never required)
 - Fitness interests
 - Equipment preferences
@@ -22,11 +23,11 @@ Profile creation/editing for signed-in members:
 ## Structure
 
 - `actions/` — `updateProfileAction`
-- `components/` — `ProfileForm`, `ProfileSummary`
-- `lib/` — labels and privacy defaults
+- `components/` — `ProfileForm`, `ProfileSummary`, `ProfileAvatar`, `AvatarUploadField`
+- `lib/` — labels, privacy defaults, avatar validation
 - `schemas/` — Zod validation
-- `services/` — Supabase profile get/update
-- `tests/` — schema + component tests
+- `services/` — Supabase profile get/update + avatar upload/remove
+- `tests/` — schema + component + avatar helper tests
 
 ## API surface
 
@@ -45,4 +46,4 @@ Profile creation/editing for signed-in members:
 
 ## Dependencies
 
-Requires `profiles` table + RLS from `00001_initial_schema.sql` and authenticated sessions from `feature/authentication`.
+Requires `profiles` table + RLS from `00001_initial_schema.sql`, the `avatars` storage bucket from `00002_avatars_storage.sql`, and authenticated sessions from `feature/authentication`.

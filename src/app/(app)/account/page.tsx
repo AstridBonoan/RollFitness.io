@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/layout/app-header";
 import { Button } from "@/components/ui/button";
 import { getAuthUser } from "@/features/authentication/services/session";
+import { ProfileAvatar } from "@/features/user-profile/components/profile-avatar";
 import { ProfileSummary } from "@/features/user-profile/components/profile-summary";
 import { getCurrentProfile } from "@/features/user-profile/services/profile";
 
@@ -31,13 +32,22 @@ export default async function AccountPage() {
       <AppHeader current="account" />
 
       <main id="main-content" className="mx-auto max-w-3xl px-6 py-16">
-        <h1 className="font-display text-3xl font-semibold tracking-tight">
-          Welcome, {displayName}
-        </h1>
-        <p className="mt-3 max-w-xl text-muted-foreground">
-          Your account hub. Keep your profile current so workouts and community
-          features can adapt to your goals and ability.
-        </p>
+        <div className="flex flex-wrap items-center gap-5">
+          <ProfileAvatar
+            name={displayName}
+            avatarUrl={profile?.avatar_url}
+            size="lg"
+          />
+          <div>
+            <h1 className="font-display text-3xl font-semibold tracking-tight">
+              Welcome, {displayName}
+            </h1>
+            <p className="mt-3 max-w-xl text-muted-foreground">
+              Your account hub. Keep your profile current so workouts and
+              community features can adapt to your goals and ability.
+            </p>
+          </div>
+        </div>
 
         <div className="mt-8">
           <Button asChild>
