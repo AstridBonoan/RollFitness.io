@@ -9,13 +9,14 @@ PostgreSQL schema for RollnFitness, managed as Supabase migrations.
    - `supabase/migrations/00001_initial_schema.sql`
    - `supabase/migrations/00002_avatars_storage.sql`
    - `supabase/migrations/00003_onboarding_fields.sql`
+   - `supabase/migrations/00004_accessibility_settings.sql`
 3. Or use the Supabase CLI: `supabase db push`
 
 ## Core tables
 
 | Table | Purpose |
 | --- | --- |
-| `profiles` | Public/user profile + preferences (1:1 with `auth.users`) |
+| `profiles` | Public/user profile + preferences (1:1 with `auth.users`), including `accessibility_settings` |
 | `goals` | Active fitness goals |
 | `exercises` | Adaptive exercise catalog |
 | `workouts` | Plans / templates |
