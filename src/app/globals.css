@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f7f5;
+  --foreground: #0f1c18;
+  --card: #ffffff;
+  --card-foreground: #0f1c18;
+  --primary: #0d6b5c;
+  --primary-foreground: #f4fbf8;
+  --secondary: #e2eee9;
+  --secondary-foreground: #14352d;
+  --muted: #e8efec;
+  --muted-foreground: #4a635c;
+  --accent: #d9f0e8;
+  --accent-foreground: #0d6b5c;
+  --destructive: #b42318;
+  --destructive-foreground: #fff7f6;
+  --border: #c9d9d2;
+  --input: #c9d9d2;
+  --ring: #0d6b5c;
+  --hero-from: #062820;
+  --hero-via: #0a4a3d;
+  --hero-to: #126b58;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #071411;
+  --foreground: #e8f2ee;
+  --card: #0d1f1a;
+  --card-foreground: #e8f2ee;
+  --primary: #3ecfad;
+  --primary-foreground: #04241c;
+  --secondary: #14352d;
+  --secondary-foreground: #d9f0e8;
+  --muted: #14352d;
+  --muted-foreground: #9bb5ac;
+  --accent: #164339;
+  --accent-foreground: #d9f0e8;
+  --destructive: #f97066;
+  --destructive-foreground: #2a0907;
+  --border: #1f3d34;
+  --input: #1f3d34;
+  --ring: #3ecfad;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-syne);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-syne), system-ui, sans-serif;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-pan {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 700ms ease-out both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 800ms ease-out 160ms both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 900ms ease-out 280ms both;
+}
+
+.hero-atmosphere {
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(62, 207, 173, 0.22), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(18, 107, 88, 0.55), transparent 50%),
+    linear-gradient(135deg, var(--hero-from), var(--hero-via) 45%, var(--hero-to));
+  background-size: 140% 140%;
+  animation: soft-pan 18s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-atmosphere {
+    animation: none;
+  }
+
+  .animate-fade-up,
+  .animate-fade-up-delay,
+  .animate-fade-up-delay-2 {
+    animation: none;
+  }
+}
