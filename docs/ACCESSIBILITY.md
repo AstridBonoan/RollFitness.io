@@ -10,10 +10,10 @@ Target: **WCAG 2.2 AA**
 
 | Capability | Implementation home |
 | --- | --- |
-| Dark mode | `feature/accessibility-system` |
+| Dark mode | `feature/accessibility-system` (`/accessibility`, cookie + profile) |
 | High contrast | `feature/accessibility-system` |
 | Font scaling | `feature/accessibility-system` |
-| Reduced motion | CSS `prefers-reduced-motion` + preference store |
+| Reduced motion | CSS `prefers-reduced-motion` + user `reduce_motion` preference |
 | Keyboard navigation | All interactive features |
 | Screen reader support | Semantic HTML, labels, live regions |
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LogoutButton } from "@/features/authentication/components/logout-button";
 
 type AppHeaderProps = {
-  current?: "account" | "profile";
+  current?: "account" | "profile" | "accessibility";
 };
 
 export function AppHeader({ current }: AppHeaderProps) {
@@ -43,6 +43,21 @@ export function AppHeader({ current }: AppHeaderProps) {
                   aria-current={current === "profile" ? "page" : undefined}
                 >
                   Profile
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/accessibility"
+                  className={
+                    current === "accessibility"
+                      ? "font-medium text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }
+                  aria-current={
+                    current === "accessibility" ? "page" : undefined
+                  }
+                >
+                  Accessibility
                 </Link>
               </li>
             </ul>

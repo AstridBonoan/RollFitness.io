@@ -44,6 +44,54 @@
   --ring: #3ecfad;
 }
 
+.high-contrast {
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --primary: #005a4a;
+  --primary-foreground: #ffffff;
+  --secondary: #e8e8e8;
+  --secondary-foreground: #000000;
+  --muted: #f0f0f0;
+  --muted-foreground: #1a1a1a;
+  --accent: #d0d0d0;
+  --accent-foreground: #000000;
+  --destructive: #8b0000;
+  --destructive-foreground: #ffffff;
+  --border: #000000;
+  --input: #000000;
+  --ring: #000000;
+}
+
+.dark.high-contrast {
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #000000;
+  --card-foreground: #ffffff;
+  --primary: #5cffd5;
+  --primary-foreground: #000000;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ffffff;
+  --muted: #141414;
+  --muted-foreground: #f0f0f0;
+  --accent: #222222;
+  --accent-foreground: #ffffff;
+  --destructive: #ff6b6b;
+  --destructive-foreground: #000000;
+  --border: #ffffff;
+  --input: #ffffff;
+  --ring: #ffffff;
+}
+
+html.font-scale-large {
+  font-size: 112.5%;
+}
+
+html.font-scale-x-large {
+  font-size: 125%;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -78,6 +126,15 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }
 
 body {
@@ -141,4 +198,14 @@ body {
   .animate-fade-up-delay-2 {
     animation: none;
   }
+}
+
+.reduce-motion .hero-atmosphere {
+  animation: none;
+}
+
+.reduce-motion .animate-fade-up,
+.reduce-motion .animate-fade-up-delay,
+.reduce-motion .animate-fade-up-delay-2 {
+  animation: none;
 }

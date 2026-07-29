@@ -4,24 +4,48 @@
 
 ## Scope
 
-WCAG 2.2 AA platform controls: dark mode, high contrast, font scaling, reduced motion, keyboard and screen reader support.
+WCAG 2.2 AA platform controls:
+
+- Color theme (light / dark / match device)
+- High contrast
+- Font scaling (default / large / extra large)
+- Reduce motion (user preference on top of `prefers-reduced-motion`)
+
+## Routes
+
+| Path | Purpose |
+| --- | --- |
+| `/accessibility` | Signed-in preference controls (protected) |
+
+## Behavior
+
+- Preferences apply via `html` classes: `dark`, `high-contrast`, `font-scale-*`, `reduce-motion`
+- Cookie `rf-a11y` prevents theme flash (bootstrap script in root layout)
+- Signed-in users also persist to `profiles.accessibility_settings`
+- Guests / signed-out sessions still get cookie-based preferences when set
 
 ## Structure
 
-- `components/` — feature UI
-- `hooks/` — feature hooks
-- `services/` — Supabase / domain services
-- `tests/` — unit and component tests
+- `actions/` — `saveAccessibilitySettingsAction`
+- `components/` — `AccessibilitySettingsForm`
+- `lib/` — constants, parse/serialize, bootstrap script
+- `schemas/` — Zod validation
+- `services/` — cookie + profile persistence
+- `tests/` — parser / schema unit tests
+
+## Database
+
+Requires `supabase/migrations/00004_accessibility_settings.sql`.
 
 ## Acceptance criteria
 
-- [ ] Implemented behind `feature/accessibility-system` (not directly on `main`)
-- [ ] Unit/component tests included
-- [ ] Accessibility verified (keyboard + axe)
-- [ ] Types and Zod schemas documented where forms exist
-- [ ] Feature README updated with API surface and dependencies
+- [x] Implemented behind `feature/accessibility-system`
+- [x] Unit tests included
+- [x] Accessibility verified (redirect path + axe)
+- [x] Zod schemas for settings form
+- [x] Feature README updated
 - [ ] PR opened; CI green before merge
 
 ## Dependencies
 
-See `docs/FEATURE_BRANCHES.md` for recommended delivery order.
+`feature/authentication`. Complements future `feature/brand-system` tokens (defaults these prefs adjust).

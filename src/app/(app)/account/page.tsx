@@ -59,6 +59,9 @@ export default async function AccountPage() {
           <Button asChild variant={isOnboardingComplete(profile) ? "default" : "outline"}>
             <Link href="/profile">Edit profile</Link>
           </Button>
+          <Button asChild variant="outline">
+            <Link href="/accessibility">Accessibility</Link>
+          </Button>
         </div>
 
         {!isOnboardingComplete(profile) ? (

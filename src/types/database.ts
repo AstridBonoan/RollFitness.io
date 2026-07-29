@@ -52,6 +52,7 @@ export interface Database {
           workout_experience: WorkoutExperience | null;
           onboarding_completed_at: string | null;
           privacy_settings: Json;
+          accessibility_settings: Json;
           created_at: string;
           updated_at: string;
         };
@@ -67,6 +68,7 @@ export interface Database {
           workout_experience?: WorkoutExperience | null;
           onboarding_completed_at?: string | null;
           privacy_settings?: Json;
+          accessibility_settings?: Json;
           created_at?: string;
           updated_at?: string;
         };

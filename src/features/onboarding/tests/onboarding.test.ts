@@ -20,6 +20,12 @@ const baseProfile = {
     profile_visibility: "friends",
     activity_visibility: "friends",
   },
+  accessibility_settings: {
+    theme: "system",
+    high_contrast: false,
+    font_scale: "default",
+    reduce_motion: false,
+  },
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
 } satisfies Profile;
