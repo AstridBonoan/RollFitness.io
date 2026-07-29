@@ -4,6 +4,10 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { profileUpdateSchema } from "@/features/user-profile/schemas/profile";
+import {
+  removeAvatar,
+  uploadAvatar,
+} from "@/features/user-profile/services/avatar";
 import { updateCurrentProfile } from "@/features/user-profile/services/profile";
 import type { MobilityLevel } from "@/types/database";
 import {
@@ -46,6 +50,23 @@ export async function updateProfileAction(
 
   if (!parsed.success) {
     return { error: firstIssueMessage(parsed.error) };
+  }
+
+  const removeAvatarRequested = formData.get("removeAvatar") === "true";
+  const avatarEntry = formData.get("avatar");
+  const avatarFile =
+    avatarEntry instanceof File && avatarEntry.size > 0 ? avatarEntry : null;
+
+  if (removeAvatarRequested) {
+    const removal = await removeAvatar();
+    if (removal.error) {
+      return { error: removal.error };
+    }
+  } else if (avatarFile) {
+    const upload = await uploadAvatar(avatarFile);
+    if (upload.error) {
+      return { error: upload.error };
+    }
   }
 
   const mobilityLevel =

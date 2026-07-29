@@ -2,10 +2,15 @@
 
 import { useActionState } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   updateProfileAction,
   type ProfileActionState,
 } from "@/features/user-profile/actions/profile";
+import { AvatarUploadField } from "@/features/user-profile/components/avatar-upload-field";
 import {
   EQUIPMENT_LABELS,
   FITNESS_INTEREST_LABELS,
@@ -19,10 +24,6 @@ import {
   FITNESS_GOALS,
   MOBILITY_LEVELS,
 } from "@/lib/constants";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 
 const initialState: ProfileActionState = {};
 
@@ -53,6 +54,11 @@ export function ProfileForm({ profile }: ProfileFormProps) {
             How you appear across RollnFitness. Diagnosis is never required.
           </p>
         </div>
+
+        <AvatarUploadField
+          displayName={profile.display_name}
+          avatarUrl={profile.avatar_url}
+        />
 
         <div>
           <Label htmlFor="displayName">Display name</Label>
