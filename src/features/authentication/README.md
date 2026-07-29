@@ -6,13 +6,15 @@
 
 Supabase Auth for RollnFitness:
 
-- Email/password signup and login
+- Email/password signup and login (signup auto-signs the user in when Supabase returns a session)
 - Logout
 - Password reset request + update
-- Email verification handoff
+- Email verification handoff (only when confirm-email blocks an immediate session)
 - Session refresh via middleware (`getClaims`)
 - Protected routes (`/account`, `/update-password`)
 - Auth callback for PKCE email links
+
+> **Supabase setting:** For signup to always log the user in immediately, disable **Authentication → Providers → Email → Confirm email** in the Supabase dashboard. When confirm-email is enabled, Supabase withholds the session until the user clicks the verification link.
 
 ## Routes
 
