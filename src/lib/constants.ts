@@ -30,6 +30,12 @@ export const EQUIPMENT_OPTIONS = [
   "wheelchair_accessible",
 ] as const;
 
+export const WORKOUT_EXPERIENCE_LEVELS = [
+  "beginner",
+  "some_experience",
+  "experienced",
+] as const;
+
 export const COMMUNITY_INTERESTS = [
   "healthy_cooking",
   "adaptive_sports",

@@ -25,6 +25,11 @@ export type MobilityLevel =
   | "seated"
   | "assisted";
 
+export type WorkoutExperience =
+  | "beginner"
+  | "some_experience"
+  | "experienced";
+
 export type Difficulty = "beginner" | "intermediate" | "advanced";
 
 export type FriendshipStatus = "pending" | "accepted" | "declined" | "blocked";
@@ -44,6 +49,8 @@ export interface Database {
           fitness_interests: string[] | null;
           equipment_preferences: string[] | null;
           mobility_level: MobilityLevel | null;
+          workout_experience: WorkoutExperience | null;
+          onboarding_completed_at: string | null;
           privacy_settings: Json;
           created_at: string;
           updated_at: string;
@@ -57,6 +64,8 @@ export interface Database {
           fitness_interests?: string[] | null;
           equipment_preferences?: string[] | null;
           mobility_level?: MobilityLevel | null;
+          workout_experience?: WorkoutExperience | null;
+          onboarding_completed_at?: string | null;
           privacy_settings?: Json;
           created_at?: string;
           updated_at?: string;
@@ -434,6 +443,7 @@ export interface Database {
     Enums: {
       fitness_goal: FitnessGoal;
       mobility_level: MobilityLevel;
+      workout_experience: WorkoutExperience;
       difficulty: Difficulty;
       friendship_status: FriendshipStatus;
       partner_status: PartnerStatus;

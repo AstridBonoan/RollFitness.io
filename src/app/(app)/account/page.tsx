@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/layout/app-header";
 import { Button } from "@/components/ui/button";
 import { getAuthUser } from "@/features/authentication/services/session";
+import { isOnboardingComplete } from "@/features/onboarding/lib/status";
 import { ProfileAvatar } from "@/features/user-profile/components/profile-avatar";
 import { ProfileSummary } from "@/features/user-profile/components/profile-summary";
 import { getCurrentProfile } from "@/features/user-profile/services/profile";
@@ -49,11 +50,26 @@ export default async function AccountPage() {
           </div>
         </div>
 
-        <div className="mt-8">
-          <Button asChild>
+        <div className="mt-8 flex flex-wrap gap-3">
+          {!isOnboardingComplete(profile) ? (
+            <Button asChild>
+              <Link href="/onboarding">Complete setup</Link>
+            </Button>
+          ) : null}
+          <Button asChild variant={isOnboardingComplete(profile) ? "default" : "outline"}>
             <Link href="/profile">Edit profile</Link>
           </Button>
         </div>
+
+        {!isOnboardingComplete(profile) ? (
+          <div
+            role="status"
+            className="mt-8 rounded-md border border-primary/30 bg-primary/10 px-4 py-3 text-sm text-primary"
+          >
+            Finish onboarding so we can personalize workouts around your goals
+            and mobility preferences.
+          </div>
+        ) : null}
 
         <section aria-labelledby="account-details" className="mt-12">
           <h2
