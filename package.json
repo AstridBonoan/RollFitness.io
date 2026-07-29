@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "description": "Accessibility-first adaptive wellness platform for people with physical disabilities, wheelchair users, and rehabilitation patients.",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
