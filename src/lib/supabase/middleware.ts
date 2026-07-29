@@ -6,9 +6,12 @@ import {
   getSupabaseUrl,
 } from "@/lib/supabase/env";
 
+const PROTECTED_PREFIXES = ["/account", "/update-password"];
+const AUTH_ROUTES = ["/login", "/signup", "/forgot-password", "/verify-email"];
+
 /**
- * Refresh the Supabase auth session on each matched request.
- * Feature branches will extend this for protected-route logic.
+ * Refresh the Supabase auth session and enforce route guards.
+ * Uses getClaims() to validate JWT identity per current Supabase SSR guidance.
  */
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
@@ -37,8 +40,30 @@ export async function updateSession(request: NextRequest) {
     },
   });
 
-  // Refresh session — do not remove; required for Server Components auth.
-  await supabase.auth.getUser();
+  const { data } = await supabase.auth.getClaims();
+  const isAuthenticated = Boolean(data?.claims);
+
+  const pathname = request.nextUrl.pathname;
+  const isProtected = PROTECTED_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+  const isAuthRoute = AUTH_ROUTES.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
+  );
+
+  if (isProtected && !isAuthenticated) {
+    const loginUrl = request.nextUrl.clone();
+    loginUrl.pathname = "/login";
+    loginUrl.searchParams.set("next", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  if (isAuthRoute && isAuthenticated && pathname !== "/verify-email") {
+    const accountUrl = request.nextUrl.clone();
+    accountUrl.pathname = "/account";
+    accountUrl.search = "";
+    return NextResponse.redirect(accountUrl);
+  }
 
   return supabaseResponse;
 }
