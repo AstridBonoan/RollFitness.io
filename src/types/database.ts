@@ -32,6 +32,8 @@ export type WorkoutExperience =
 
 export type Difficulty = "beginner" | "intermediate" | "advanced";
 
+export type AppRole = "member" | "admin";
+
 export type FriendshipStatus = "pending" | "accepted" | "declined" | "blocked";
 
 export type PartnerStatus = "pending" | "active" | "paused" | "ended";
@@ -53,6 +55,7 @@ export interface Database {
           onboarding_completed_at: string | null;
           privacy_settings: Json;
           accessibility_settings: Json;
+          role: AppRole;
           created_at: string;
           updated_at: string;
         };
@@ -69,6 +72,7 @@ export interface Database {
           onboarding_completed_at?: string | null;
           privacy_settings?: Json;
           accessibility_settings?: Json;
+          role?: AppRole;
           created_at?: string;
           updated_at?: string;
         };

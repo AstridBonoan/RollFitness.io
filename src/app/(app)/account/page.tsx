@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/layout/app-header";
 import { Button } from "@/components/ui/button";
 import { getAuthUser } from "@/features/authentication/services/session";
+import { isAdminRole } from "@/features/authentication/lib/roles";
 import { isOnboardingComplete } from "@/features/onboarding/lib/status";
 import { ProfileAvatar } from "@/features/user-profile/components/profile-avatar";
 import { ProfileSummary } from "@/features/user-profile/components/profile-summary";
@@ -22,6 +23,7 @@ export default async function AccountPage() {
   }
 
   const profile = await getCurrentProfile();
+  const isAdmin = isAdminRole(profile?.role);
   const displayName =
     profile?.display_name ??
     (user.user_metadata?.display_name as string | undefined) ??
@@ -43,6 +45,11 @@ export default async function AccountPage() {
             <h1 className="font-display text-3xl font-semibold tracking-tight">
               Welcome, {displayName}
             </h1>
+            {isAdmin ? (
+              <p className="mt-2 text-sm font-medium text-primary">
+                Admin account
+              </p>
+            ) : null}
             <p className="mt-3 max-w-xl text-muted-foreground">
               Your account hub. Keep your profile current so workouts and
               community features can adapt to your goals and ability.
@@ -65,6 +72,11 @@ export default async function AccountPage() {
           <Button asChild variant="outline">
             <Link href="/exercises">Exercise library</Link>
           </Button>
+          {isAdmin ? (
+            <Button asChild variant="outline">
+              <Link href="/admin">Admin</Link>
+            </Button>
+          ) : null}
         </div>
 
         {!isOnboardingComplete(profile) ? (
