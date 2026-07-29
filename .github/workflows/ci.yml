@@ -60,11 +60,11 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: public-anon-key-for-ci
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: public-publishable-key-for-ci
 
       - name: End-to-end & accessibility tests
         run: npm run test:e2e
         env:
           CI: true
           NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: public-anon-key-for-ci
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: public-publishable-key-for-ci
