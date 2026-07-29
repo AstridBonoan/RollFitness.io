@@ -70,9 +70,12 @@ Features may import from `src/lib`, `src/components/ui`, and `src/types`. Featur
 | Variable | Used by |
 | --- | --- |
 | `NEXT_PUBLIC_SUPABASE_URL` | Browser + server clients |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser + server clients |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Browser + server clients |
 
+`NEXT_PUBLIC_SUPABASE_ANON_KEY` is still accepted as a legacy fallback.
 Service-role keys must never be exposed to the client.
+
+Helpers live in `src/lib/supabase` (preferred) and `src/utils/supabase` (Supabase docs path).
 
 ## Deployment topology
 
