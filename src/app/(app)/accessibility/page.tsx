@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import { AppHeader } from "@/components/layout/app-header";
 import { AccessibilitySettingsForm } from "@/features/accessibility-system/components/accessibility-settings-form";
+import { serializeAccessibilitySettings } from "@/features/accessibility-system/lib/settings";
 import { resolveAccessibilitySettings } from "@/features/accessibility-system/services/accessibility";
 import { getAuthUser } from "@/features/authentication/services/session";
 
@@ -39,12 +40,15 @@ export default async function AccessibilityPage() {
           Accessibility
         </h1>
         <p className="mt-3 max-w-xl text-muted-foreground">
-          Adjust theme, contrast, text size, and motion so RollnFitness fits how
-          you see and move through the product.
+          Use Dark mode below to switch light and dark. Changes preview
+          immediately on this page.
         </p>
 
         <div className="mt-10">
-          <AccessibilitySettingsForm settings={settings} />
+          <AccessibilitySettingsForm
+            key={serializeAccessibilitySettings(settings)}
+            settings={settings}
+          />
         </div>
       </main>
     </div>

@@ -8,6 +8,7 @@ import type { AccessibilitySettings } from "@/features/accessibility-system/lib/
 
 export type AccessibilityActionState = {
   error?: string;
+  warning?: string;
   success?: boolean;
   settings?: AccessibilitySettings;
 };
@@ -38,12 +39,18 @@ export async function saveAccessibilitySettingsAction(
 
   const result = await updateAccessibilitySettings(settings);
 
-  if (result.error) {
-    return { error: result.error };
-  }
-
   revalidatePath("/account");
   revalidatePath("/accessibility");
+
+  // Cookie always applies for this browser; profile sync may fail if migration
+  // is not applied yet — still treat as success so the UI updates.
+  if (result.error) {
+    return {
+      success: true,
+      settings,
+      warning: `Saved for this browser. Profile sync failed: ${result.error}. If you have not run migration 00004 yet, apply it in Supabase.`,
+    };
+  }
 
   return { success: true, settings };
 }
