@@ -46,12 +46,20 @@ SQL editor sessions (no end-user JWT) can still change `role` — that is intent
 ## What admins can do
 
 - `/admin` — admin home
-- `/admin/exercises` — edit catalog copy
-- Upload **photo and video files from your computer** (stored in Supabase Storage bucket `exercise-media`)
+- `/admin/exercises` — edit exercise copy + upload photo/video
+- `/admin/plans` — edit plan templates + upload overview photo/video
+- Upload **files from your computer** (Supabase Storage bucket `exercise-media`)
 - Optional paste URL still available as a fallback
+- Meals and other catalogs will reuse this same pattern
 
-### Storage migration
+### Migrations
 
-Apply `supabase/migrations/00007_exercise_media_storage.sql` after `00006`.
+Apply in order after earlier schema seeds:
+
+- `00006_admin_role.sql`
+- `00007_exercise_media_storage.sql`
+- `00008_workout_plans.sql` (plan columns, admin RLS on `workouts`, template seed)
 
 Limits: photos ≤ 5 MB (JPEG/PNG/WebP/GIF); videos ≤ 50 MB (MP4/WebM/MOV).
+
+Paths: exercises at `{slug}/…`; plans at `plans/{slug}/…`.

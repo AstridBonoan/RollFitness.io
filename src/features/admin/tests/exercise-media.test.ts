@@ -1,5 +1,6 @@
 import {
   buildExerciseMediaPath,
+  buildPlanMediaPath,
   validateExerciseImageFile,
   validateExerciseVideoFile,
 } from "@/features/admin/lib/exercise-media";
@@ -34,4 +35,14 @@ describe("exercise media validation", () => {
       "seated-row-band/video.mp4",
     );
   });
+
+  it("builds plan media under plans/{slug}", () => {
+    expect(
+      buildPlanMediaPath("seated-upper-starter", "photo", "image/jpeg"),
+    ).toBe("plans/seated-upper-starter/photo.jpg");
+    expect(
+      buildPlanMediaPath("seated-upper-starter", "video", "video/webm"),
+    ).toBe("plans/seated-upper-starter/video.webm");
+  });
 });
+

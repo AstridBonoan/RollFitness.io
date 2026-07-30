@@ -37,7 +37,18 @@ export default async function AdminPage() {
             </Button>
           </div>
 
+          <div className="rounded-md border border-border px-4 py-4">
+            <h2 className="font-medium text-foreground">Workout plans</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Improve plan templates and upload overview media the same way.
+            </p>
+            <Button asChild className="mt-4">
+              <Link href="/admin/plans">Manage plans</Link>
+            </Button>
+          </div>
+
           <div className="rounded-md border border-border px-4 py-4 text-sm text-muted-foreground">
+            Meals and other catalogs will use this same admin upload pattern.
             Promote or demote admins with the SQL in{" "}
             <code className="font-mono text-xs">docs/ADMIN.md</code>.
           </div>

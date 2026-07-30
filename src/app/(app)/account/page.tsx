@@ -72,6 +72,9 @@ export default async function AccountPage() {
           <Button asChild variant="outline">
             <Link href="/exercises">Exercise library</Link>
           </Button>
+          <Button asChild variant="outline">
+            <Link href="/plans">Workout plans</Link>
+          </Button>
           {isAdmin ? (
             <Button asChild variant="outline">
               <Link href="/admin">Admin</Link>

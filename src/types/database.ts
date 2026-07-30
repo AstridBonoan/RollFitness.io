@@ -152,6 +152,11 @@ export interface Database {
           mobility_level: MobilityLevel | null;
           created_by: string | null;
           is_template: boolean;
+          slug: string | null;
+          image_url: string | null;
+          video_url: string | null;
+          equipment: string[];
+          exercise_slugs: string[];
           created_at: string;
           updated_at: string;
         };
@@ -165,6 +170,11 @@ export interface Database {
           mobility_level?: MobilityLevel | null;
           created_by?: string | null;
           is_template?: boolean;
+          slug?: string | null;
+          image_url?: string | null;
+          video_url?: string | null;
+          equipment?: string[];
+          exercise_slugs?: string[];
           created_at?: string;
           updated_at?: string;
         };
