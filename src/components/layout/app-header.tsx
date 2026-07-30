@@ -4,7 +4,13 @@ import { LogoutButton } from "@/features/authentication/components/logout-button
 import { isCurrentUserAdmin } from "@/features/authentication/services/admin";
 
 type AppHeaderProps = {
-  current?: "account" | "profile" | "accessibility" | "exercises" | "admin";
+  current?:
+    | "account"
+    | "profile"
+    | "accessibility"
+    | "exercises"
+    | "plans"
+    | "admin";
 };
 
 export async function AppHeader({ current }: AppHeaderProps) {
@@ -46,6 +52,19 @@ export async function AppHeader({ current }: AppHeaderProps) {
                   aria-current={current === "exercises" ? "page" : undefined}
                 >
                   Exercises
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/plans"
+                  className={
+                    current === "plans"
+                      ? "font-medium text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }
+                  aria-current={current === "plans" ? "page" : undefined}
+                >
+                  Plans
                 </Link>
               </li>
               <li>

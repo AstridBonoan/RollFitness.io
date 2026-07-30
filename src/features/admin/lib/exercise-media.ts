@@ -67,3 +67,16 @@ export function buildExerciseMediaPath(
   if (!ext) return null;
   return `${slug}/${kind}.${ext}`;
 }
+
+export function buildPlanMediaPath(
+  slug: string,
+  kind: "photo" | "video",
+  contentType: string,
+): string | null {
+  const ext =
+    kind === "photo"
+      ? IMAGE_EXTENSIONS[contentType]
+      : VIDEO_EXTENSIONS[contentType];
+  if (!ext) return null;
+  return `plans/${slug}/${kind}.${ext}`;
+}
